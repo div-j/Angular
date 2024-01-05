@@ -1,0 +1,56 @@
+
+<!-- @if(product){
+        <h2>{{product.title | uppercase }} Details</h2>
+
+      <div  class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img mat-card-image src="{{product.thumbnail}}" alt="Photo of a Shiba Inu">
+          <div class="card-body">
+            <div>Description: {{product.description}}</div>
+            <div>id: {{product.price}}</div>    
+          </div>
+        </div>
+      </div>
+      
+      <button type="button" (click)="goBack()">go back</button>
+
+} -->
+
+<!-- product-detail.component.html -->
+
+<div class="container mt-5">
+<h2>Product Detail</h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <img src="{{ product.thumbnail }}" alt="{{ product.title }}" class="img-fluid">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ product.title }}</h2>
+      <p class="text-muted">{{ product.category }}</p>
+      <p class="lead">{{ product.description }}</p>
+      <p class="h4 text-primary">${{ product.price }}</p>
+
+      <!-- Add to Cart Button with Cart Icon -->
+      <!-- <button class="btn btn-primary" (click)="addToCart(product)">
+        <i class="fas fa-shopping-cart"></i> Add to Cart
+      </button> -->
+      
+    </div>
+    <div class="col-md-12">
+      <h3>Product Details</h3>
+      <ul class="list-group">          
+<li
+
+class="list-group-item">Brand: {{ product.brand }}</li>
+
+        
+<li class="list-group-item">Category: {{ product.category }}</li>
+
+        
+<li class="list-group-item">Features: {{ product.features }}</li>
+        </ul>
+    </div>
+  </div>
+</div>
+

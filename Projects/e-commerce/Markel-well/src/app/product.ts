@@ -1,0 +1,8 @@
+export interface Product {
+    id: number;
+    title: string;
+    price: number;
+    thumbnail: string;  // URL of a smaller thumbnail image
+    description: string;
+    category:string
+  }
