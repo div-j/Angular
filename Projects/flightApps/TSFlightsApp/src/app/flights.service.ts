@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
+import { Flight } from './flight.model';
+import { Observable, catchError ,tap} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class FlightsService {
 
-  flights:Flight[] = [
-    {origin:"Miami",destination:'Chicago',flightNumber:345,
-    depart:'2020-02-25T23:18:21.932Z',
-    arrive:'2020-02-25T23:21:21.932Z',nonstop:true},
-    {origin:"NewYork",destination:'LosAngeles',flightNumber:432,
-    depart:'2020-05-25T23:18:00.932Z',  
-    arrive:'2020-05-25T23:23:21.932Z',nonstop:false},
-    ];
 
-  constructor() { }
 
-  getFlights() {
-    return this.flights;
+  private apiUrl = 'http://localhost:3000/api/flights';
+
+  constructor(private http:HttpClient) { }
+
+  getFlights(): Observable<Flight[]>  {
+    return this.http.get<Flight[]>(this.apiUrl)
+ 
      
   }
+
+  getFlight(orig: string, dest: string): Observable<any> {
+    const apiUrl = `http://localhost:3000/api/flights/query/${orig}/${dest}`;
+    return this.http.get(apiUrl);
+  }
+  
+ 
+
 
   postFlight(flight: Flight) {
 

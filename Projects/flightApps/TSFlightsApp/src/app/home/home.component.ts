@@ -1,23 +1,52 @@
-import { Component,Oninit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Flight } from '../flight.model';
 import { FlightsService } from '../flights.service';
-imports {Flight} from '../flight.model.ts'
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements Oninit{
+export class HomeComponent {
 
-  flights: Flight[];
+  flights: Flight[] = [];
+  selectedDestination: any;
+  selectedOrigin: any;
 
-  constructor(private flightsService: FlightsService){}
+  constructor(private flightsService: FlightsService) { }
 
-  ngOninit(): void{
-    this.displayFlights()
+  display() {
+    console.log('Button clicked!');
+    this.flightsService.getFlights().subscribe({
+      next: (res) => {
+        this.flights = res;
+        
+        console.log(res);
+      },
+      error: (error) => {
+        // Handle error
+        console.error('Error:', error);
+      }
+    });
   }
-  displayFlights(){
-    this.flights = this.flightsService.getFlights();
+  queryMethod(){
+    const origin =this.selectedOrigin
+    const destibation =  this.selectedDestination
+    this.flightsService.getFlight(origin,destibation).subscribe({
+      next: (res) => {
+        this.flights = res;
+        console.log(res);
+      },
+      error: (error) => {
+        // Handle error
+        console.error('Error:', error);
+      }
+    });
+  }
+  ngOnInit(): void {
+    this.display()
   }
 
+  
 }
